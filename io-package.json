@@ -1,0 +1,116 @@
+{
+    "common": {
+        "name": "powerfox",
+        "version": "0.0.1",
+        "news": {
+            "0.0.1": {
+                "en": "initial release",
+                "de": "Erstveröffentlichung",
+                "ru": "Начальная версия",
+                "pt": "lançamento inicial",
+                "nl": "Eerste uitgave",
+                "fr": "Première version",
+                "it": "Versione iniziale",
+                "es": "Versión inicial",
+                "pl": "Pierwsze wydanie",
+                "zh-cn": "首次出版"
+            }
+        },
+        "title": "powerfox",
+        "titleLang": {
+            "en": "powerfox",
+            "de": "powerfox",
+            "ru": "powerfox",
+            "pt": "powerfox",
+            "nl": "powerfox",
+            "fr": "powerfox",
+            "it": "powerfox",
+            "es": "powerfox",
+            "pl": "powerfox",
+            "zh-cn": "powerfox"
+        },
+        "desc": {
+            "en": "powerfox provides energy data",
+            "de": "powerfox liefert Energiedaten",
+            "ru": "powerfox предоставляет данные об энергии",
+            "pt": "powerfox fornece dados de energia",
+            "nl": "powerfox levert energiegegevens",
+            "fr": "powerfox fournit des données énergétiques",
+            "it": "powerfox fornisce dati sull'energia",
+            "es": "powerfox proporciona datos de energía",
+            "pl": "powerfox dostarcza dane dotyczące energii",
+            "zh-cn": "powerfox提供能源数据"
+        },
+        "authors": [
+            "bazidibavaria <bazidibavaria@users.noreply.github.com>"
+        ],
+        "keywords": [
+            "powerfox",
+            "energiedaten",
+            "energy data",
+            "stromverbrauch",
+            "strommessung"
+        ],
+        "license": "MIT",
+        "platform": "Javascript/Node.js",
+        "main": "main.js",
+        "icon": "powerfox.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/bazidibavaria/ioBroker.powerfox/master/admin/powerfox.png",
+        "readme": "https://github.com/bazidibavaria/ioBroker.powerfox/blob/master/README.md",
+        "loglevel": "info",
+        "mode": "schedule",
+        "schedule": "* * * * *",
+        "type": "communication",
+        "compact": true,
+        "connectionType": "cloud",
+        "dataSource": "poll",
+        "materialize": true,
+        "materializeTab": true,
+        "localLink": "https://www.powerfox.energy/",
+        "adminTab": {
+            "singleton": true,
+            "name": {
+                "en": "powerfox",
+                "de": "powerfox",
+                "ru": "powerfox",
+                "pt": "powerfox",
+                "nl": "powerfox",
+                "fr": "powerfox",
+                "it": "powerfox",
+                "es": "powerfox",
+                "pl": "powerfox",
+                "zh-cn": "powerfox"
+            },
+            "link": "",
+            "fa-icon": "info"
+        },
+        "dependencies": [
+            {
+                "js-controller": ">=1.4.2"
+            }
+        ]
+    },
+    "encryptedNative": [
+        "password"
+    ],
+    "protectedNative": [
+        "password"
+    ],
+    "native": {
+        "username": "",
+        "password": ""
+    },
+    "objects": [],
+    "instanceObjects": [
+        {
+            "_id": "devices",
+            "type": "channel",
+            "common": {
+                "role": "state",
+                "name": "devices"
+            },
+            "native": {}
+        }
+    ]
+}

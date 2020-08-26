@@ -55,7 +55,7 @@
         "platform": "Javascript/Node.js",
         "main": "main.js",
         "icon": "powerfox.png",
-        "enabled": true,
+        "enabled": false,
         "extIcon": "https://raw.githubusercontent.com/bazidibavaria/ioBroker.powerfox/master/admin/powerfox.png",
         "readme": "https://github.com/bazidibavaria/ioBroker.powerfox/blob/master/README.md",
         "loglevel": "info",
@@ -99,7 +99,8 @@
     ],
     "native": {
         "username": "",
-        "password": ""
+        "password": "",
+        "devices": [],
     },
     "objects": [],
     "instanceObjects": [

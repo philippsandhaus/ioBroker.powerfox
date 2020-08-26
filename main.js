@@ -27,10 +27,7 @@ function startAdapter(options) {
         }
     });
     adapter = new utils.Adapter(options);
-
     adapter.on('ready', () => {
-        adapter.log.debug("start");
-
         adapter.getForeignObject('system.config', (err, systemConfig) => {
             if (adapter.config.password && (!adapter.supportsFeature || !adapter.supportsFeature('ADAPTER_AUTO_DECRYPT_NATIVE'))) {
                 adapter.config.password = tools.decrypt((systemConfig && systemConfig.native && systemConfig.native.secret) || '5Cd6dDqzq8bBbKJ9', adapter.config.password);
@@ -57,35 +54,196 @@ function startAdapter(options) {
             // https://backend.powerfox.energy/api/2.0/my/{device}/current
             let dataUrl = "https://backend.powerfox.energy/api/2.0/my/{device}/current";
 
-            adapter.log.debug(adapter.config.email);
-            adapter.log.debug(adapter.config.password);
-            adapter.log.debug(adapter.config.devices);
-            adapter.log.debug(auth);
-            adapter.log.debug(dataUrl);
+            for (let i = 0; i < adapter.config.devices.length; i++) {
+                let device = adapter.config.devices[i];
 
-            // request({
-            //     method: 'GET',
-            //     rejectUnauthorized: false,
-            //     url: dataUrl
-            // }, (error, response, body) => {
-            //     if (!error && response.statusCode === 200) {
-            //         let data = JSON.parse(body);
-            //         if(typeof data == 'object' && data.hasOwnProperty("message")){
-            //             adapter.log.error('Wrong JSON returned');
-            //             killAdapter();
-            //         } else {
-            //             // do action
-            //         }
-            //     } else {
-            //         adapter.log.error('Cannot read JSON file: ' + error || response.statusCode);
-            //         killAdapter();
-            //     }
-            //     killAdapter();
-            // });
+                if(device.active){
+                    let curDataUrl = dataUrl.replace(/{device}/, device.name);
+                    let path = 'devices.'+createVarName(device.name);
 
+                    adapter.log.debug(device.name);
+                    adapter.log.debug(device.active);
+                    adapter.log.debug(device.aws);
+
+                    adapter.log.debug(curDataUrl);
+
+                    request({
+                        method: 'GET',
+                        url: curDataUrl,
+                        headers : {
+                            "Authorization" : auth
+                        }
+                    }, (error, response, body) => {
+                        if (!error && response.statusCode === 200) {
+                            let data = JSON.parse(body);
+                            if(typeof data == 'object'){
+                                if(data.hasOwnProperty("message")){
+                                    adapter.log.error('Error: ' + data.message);
+                                } else {
+                                    /*
+                                        {
+                                            "Watt": 891.0,
+                                            "Timestamp": 1598473947,
+                                            "A_Plus": 19910672.0,
+                                            "A_Minus": 40175502.0
+                                        }
+                                    */
+                                    if(data.hasOwnProperty("Watt")){
+                                        adapter.setObjectNotExists(path + '.currentPower', {
+                                            type: 'state',
+                                            common: {
+                                                name: 'current power (W)',
+                                                type: 'number',
+                                                role: 'value',
+                                                unit: "W",
+                                                read: false,
+                                                write: false,
+                                            },
+                                            native: {},
+                                        });
+                                        adapter.setState(path+'.currentPower', data["Watt"]);
+                                    }
+                                    if(data.hasOwnProperty("Timestamp")){
+                                        adapter.setObjectNotExists(path + '.timestamp', {
+                                            type: 'state',
+                                            common: {
+                                                name: 'DateTime from data',
+                                                type: 'string',
+                                                role: 'date',
+                                                read: false,
+                                                write: false,
+                                            },
+                                            native: {},
+                                        });
+                                        let timestamp = new Date((parseInt(data["Timestamp"]) || 0) * 1000).toUTCString();
+                                        adapter.setState(path+'.timestamp', timestamp);
+                                    }
+                                    if(data.hasOwnProperty("A_Plus")){
+                                        adapter.setObjectNotExists(path + '.consumptionMeterReadingKWh', {
+                                            type: 'state',
+                                            common: {
+                                                name: 'consumption meter reading (KWh)',
+                                                type: 'number',
+                                                role: 'value',
+                                                unit: "KWh",
+                                                read: false,
+                                                write: false,
+                                            },
+                                            native: {},
+                                        });
+                                        adapter.setState(path+'.consumptionMeterReadingKWh', (data["A_Plus"]/1000));
+
+                                        adapter.setObjectNotExists(path + '.consumptionMeterReadingWh', {
+                                            type: 'state',
+                                            common: {
+                                                name: 'consumption meter reading (Wh)',
+                                                type: 'number',
+                                                role: 'value',
+                                                unit: "KWh",
+                                                read: false,
+                                                write: false,
+                                            },
+                                            native: {},
+                                        });
+                                        adapter.setState(path+'.consumptionMeterReadingWh', (data["A_Plus"]));
+
+                                        // adapter.getState(path + '.consumptionMeterReading', function (err, state) {
+                                        //     if(state){
+                                        //         let curVal = data["A_Plus"] - (state.val * 1000 || 0);
+
+                                        //         adapter.setObjectNotExists(path + '.consumption', {
+                                        //             type: 'state',
+                                        //             common: {
+                                        //                 name: 'consumption (Wh)',
+                                        //                 type: 'number',
+                                        //                 role: 'value',
+                                        //                 unit: "Wh",
+                                        //                 read: false,
+                                        //                 write: false,
+                                        //             },
+                                        //             native: {},
+                                        //         });
+                                        //         adapter.setState(path+'.consumption', curVal);
+                                        //     }
+                                            // adapter.setState(path+'.consumptionMeterReading', (data["A_Plus"]/1000));
+                                        // });
+                                    }
+                                    if(data.hasOwnProperty("A_Minus")){
+                                        adapter.setObjectNotExists(path + '.feedInMeterReadingKWh', {
+                                            type: 'state',
+                                            common: {
+                                                name: 'feed in meter reading (KWh)',
+                                                type: 'number',
+                                                role: 'value',
+                                                unit: "KWh",
+                                                read: false,
+                                                write: false,
+                                            },
+                                            native: {},
+                                        });
+                                        adapter.setState(path+'.feedInMeterReadingKWh', (data["A_Minus"]/1000));
+
+                                        adapter.setObjectNotExists(path + '.feedInMeterReadingWh', {
+                                            type: 'state',
+                                            common: {
+                                                name: 'feed in meter reading (Wh)',
+                                                type: 'number',
+                                                role: 'value',
+                                                unit: "KWh",
+                                                read: false,
+                                                write: false,
+                                            },
+                                            native: {},
+                                        });
+                                        adapter.setState(path+'.feedInMeterReadingWh', (data["A_Minus"]));
+
+                                        // adapter.getState(path + '.feedInMeterReading', function (err, state) {
+                                        //     if(state){
+                                        //         let curVal = data["A_Minus"] - (state.val * 1000 || 0);
+
+                                        //         adapter.setObjectNotExists(path + '.feedIn', {
+                                        //             type: 'state',
+                                        //             common: {
+                                        //                 name: 'feed in (Wh)',
+                                        //                 type: 'number',
+                                        //                 role: 'value',
+                                        //                 unit: "Wh",
+                                        //                 read: false,
+                                        //                 write: false,
+                                        //             },
+                                        //             native: {},
+                                        //         });
+                                        //         adapter.setState(path+'.feedIn', curVal);
+                                        //     }
+                                            // adapter.setState(path+'.feedInMeterReading', (data["A_Minus"]/1000));
+                                        // });
+                                    }
+                                }
+                            } else {
+                                adapter.log.error('NO JSON returned');
+                            }
+                        } else {
+                            if(response.statusCode === 401){
+                                adapter.log.error('wrong credentials');
+                            } else {
+                                if(error !== null){
+                                    adapter.log.error('Error: ' + error);
+                                } else {
+                                    adapter.log.error('Error: ' + response.statusCode);
+                                    let data = JSON.parse(body);
+                                    if(typeof data == 'object'){
+                                        adapter.log.error('Error: ' + JSON.stringify(data));
+                                    } else {
+                                        adapter.log.error('Error: ' + body);
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+            killAdapter();
         });
-
-        adapter.log.debug("end");
     });
 
     return adapter;
@@ -106,10 +264,10 @@ function killAdapter(){
 let killSwitchTimeout = setTimeout(() => {
     killSwitchTimeout = null;
     if (!isStopped) {
-        adapter && adapter.log && adapter.log.info('force terminating after 4 minutes');
+        adapter && adapter.log && adapter.log.info('force terminating after 1 minute');
         adapter && adapter.stop && adapter.stop();
     }
-}, 240000);
+}, 55000);
 
 // If started as allInOne/compact mode => return function to create instance
 if (module && module.parent) {

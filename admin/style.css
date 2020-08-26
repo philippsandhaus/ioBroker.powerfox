@@ -3,19 +3,19 @@
     padding: .5rem;
 }
 
-.login-test-state .material-icons.success {
+.update-device-list-state .material-icons.success {
     color:green;
 }
 
-.login-test-state .material-icons.error {
+.update-device-list-state .material-icons.error {
     color:red;
 }
 
-.login-test-state .material-icons.sync {
+.update-device-list-state .material-icons.sync {
     color:orange;
 }
 
-.login-test-state .material-icons {
+.update-device-list-state .material-icons {
     padding: 0;
     margin: 0;
     position: absolute;

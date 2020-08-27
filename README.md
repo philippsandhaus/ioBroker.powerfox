@@ -14,7 +14,7 @@
 
 ## powerfox adapter for ioBroker
 
-powerfox provides energy data from there API
+powerfox provides energy data from their API
 
 API-Documentation can be found here
 https://www.powerfox.energy/wp-content/uploads/2020/05/powerfox-Kunden-API.pdf

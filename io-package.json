@@ -14,6 +14,18 @@
                 "es": "* presentación\n\n## Licencia\nLicencia MIT\n\nCopyright (c) 2020 bazidibavaria <bazidibavaria@users.noreply.github.com>\n\nPor la presente se otorga permiso, sin cargo, a cualquier persona que obtenga una copia.\nde este software y los archivos de documentación asociados (el \"Software\"), para tratar\nen el Software sin restricciones, incluidos, entre otros, los derechos\nusar, copiar, modificar, fusionar, publicar, distribuir, sublicenciar y / o vender\ncopias del Software, y para permitir a las personas a las que se les\namueblado para ello, sujeto a las siguientes condiciones:\n\nEl aviso de derechos de autor anterior y este aviso de permiso se incluirán en todos\ncopias o partes sustanciales del Software.\n\nEL SOFTWARE SE PROPORCIONA \"TAL CUAL\", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O\nIMPLÍCITAS, INCLUIDAS PERO NO LIMITADAS A LAS GARANTÍAS DE COMERCIABILIDAD,\nAPTITUD PARA UN PROPÓSITO PARTICULAR Y NO INFRACCIÓN. EN NINGÚN CASO\nbazidibavariaS O LOS TITULARES DE LOS DERECHOS DE AUTOR SERÁN RESPONSABLES DE CUALQUIER RECLAMO, DAÑOS U OTROS\nRESPONSABILIDAD, YA SEA EN UNA ACCIÓN DE CONTRATO, AGRAVIO O DE OTRO MODO, QUE SURJA DE,\nFUERA DE O EN RELACIÓN CON EL SOFTWARE O EL USO U OTROS NEGOCIOS EN EL\nSOFTWARE.",
                 "pl": "* wersja wstępna\n\nLicencja ##\nLicencja MIT\n\nPrawa autorskie (c) 2020 bazidibavaria <bazidibavaria@users.noreply.github.com>\n\nNiniejszym udziela się bezpłatnej zgody każdej osobie, która uzyska kopię\ntego oprogramowania i powiązanych plików dokumentacji („Oprogramowanie”)\nw Oprogramowaniu bez ograniczeń, w tym bez ograniczeń praw\nużywać, kopiować, modyfikować, łączyć, publikować, rozpowszechniać, udzielać podlicencji i / lub sprzedawać\nkopie oprogramowania i zezwalanie osobom, którym to oprogramowanie jest\nsą do tego przystosowane, z zastrzeżeniem następujących warunków:\n\nPowyższe powiadomienie o prawach autorskich i niniejsze pozwolenie będą zawarte we wszystkich\nkopie lub istotne części Oprogramowania.\n\nOPROGRAMOWANIE JEST DOSTARCZANE „TAKIE, JAKIE JEST”, BEZ JAKIEJKOLWIEK GWARANCJI, WYRAŹNEJ ANI\nDOROZUMIANE, W TYM, ALE BEZ OGRANICZENIA DO GWARANCJI HANDLOWYCH,\nPRZYDATNOŚĆ DO OKREŚLONEGO CELU I NIENARUSZANIE PRAW. W ŻADNYM WYPADKU\nbazidibavaria LUB POSIADACZE PRAW AUTORSKICH PONOSZĄ ODPOWIEDZIALNOŚĆ ZA WSZELKIE ROSZCZENIA, SZKODY LUB INNE\nODPOWIEDZIALNOŚĆ WYNIKAJĄCA Z UMOWY, TORTU LUB W INNY SPOSÓB,\nPOZA OPROGRAMOWANIEM LUB W ZWIĄZKU Z OPROGRAMOWANIEM LUB KORZYSTANIEM Z INNYCH CZYNNOŚCI W RAMACH\nOPROGRAMOWANIE.",
                 "zh-cn": "*预发行\n\n＃＃ 执照\n麻省理工学院执照\n\n版权所有（c）2020 bazidibavaria <bazidibavaria@users.noreply.github.com>\n\n特此授予获得副本的任何人免费的许可\n软件和相关文档文件（以下简称“软件”）的交易\n在软件中不受限制，包括但不限于权利\n使用，复制，修改，合并，发布，分发，再许可和/或出售\n本软件的副本，并允许本软件所针对的人\n具备以下条件：\n\n以上版权声明和此许可声明应包含在所有\n复制本软件或本软件的实质部分。\n\n该软件按“原样”提供，没有任何形式的保证，无论是明示的还是\n暗示（包括但不限于适销性保证）\n适用于特定目的和非侵权。在任何情况下都不会\nbazidibavariaS或版权所有者对任何索赔，损害或其他责任\n无论是由于合同，侵权或其他形式的诉讼而引起的责任，\n与软件或软件的使用或其他处理无关或与之有关\n软件。"
+            },
+            "0.0.1": {
+                "en": "initial release",
+                "de": "Erstveröffentlichung",
+                "ru": "Начальная версия",
+                "pt": "lançamento inicial",
+                "nl": "Eerste uitgave",
+                "fr": "Première version",
+                "it": "Versione iniziale",
+                "es": "Versión inicial",
+                "pl": "Pierwsze wydanie",
+                "zh-cn": "首次出版"
             }
         },
         "title": "powerfox",

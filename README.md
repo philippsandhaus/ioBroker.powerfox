@@ -28,6 +28,9 @@ https://www.powerfox.energy/wp-content/uploads/2020/05/powerfox-Kunden-API.pdf
 ### 0.0.2-0 (2020-08-27)
 * (bazidibavaria) prerelease
 
+### 0.0.1 (2020-08-25)
+* (bazidibavaria) initial commit
+
 ## License
 MIT License
 

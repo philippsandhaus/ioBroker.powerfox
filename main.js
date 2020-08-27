@@ -39,12 +39,12 @@ function startAdapter(options) {
             }
 
             if(!adapter.config.email || !adapter.config.password){
-                adapter.log.error("Credential error: Please configurate Adapter first!");
+                adapter.log.info("Credential error: Please configurate Adapter first!");
                 killAdapter();
             }
 
             if(!(adapter.config.devices && adapter.config.devices.length)){
-                adapter.log.error("Devicelist error: Please define device(s) first!");
+                adapter.log.info("Devicelist error: Please define device(s) first!");
                 killAdapter();
             }
 

@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "powerfox",
-        "version": "0.0.2-1",
+        "version": "0.0.2-2",
         "news": {
+            "0.0.2-2": {
+                "en": "changed log from error to info",
+                "de": "Protokoll von Fehler zu Info geändert",
+                "ru": "изменил журнал с ошибки на информацию",
+                "pt": "log alterado de erro para informação",
+                "nl": "veranderd logboek van fout naar info",
+                "fr": "changement de journal d'erreur en info",
+                "it": "registro modificato da errore a informazioni",
+                "es": "cambio de registro de error a información",
+                "pl": "zmieniono dziennik z błędu na informacje",
+                "zh-cn": "将日志从错误更改为信息"
+            },
             "0.0.2-1": {
                 "en": "added travis-ci",
                 "de": "travis-ci hinzugefügt",

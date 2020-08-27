@@ -24,6 +24,8 @@ https://www.powerfox.energy/wp-content/uploads/2020/05/powerfox-Kunden-API.pdf
     Placeholder for the next version (at the beginning of the line):
     ### __WORK IN PROGRESS__
 -->
+### __WORK IN PROGRESS__
+* (bazidibavaria) added travis-ci
 
 ### 0.0.2-0 (2020-08-27)
 * (bazidibavaria) prerelease

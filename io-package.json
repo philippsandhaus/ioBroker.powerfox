@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "powerfox",
-        "version": "0.0.2-2",
+        "version": "0.0.2-3",
         "news": {
+            "0.0.2-3": {
+                "en": "added support for HEAT/WATER Devices\nsplit current power into power consumption and feed in\nupdate npm packages",
+                "de": "Unterstützung für HEAT / WATER-Geräte hinzugefügt\nTeilen Sie den Strom in den Stromverbrauch auf und speisen Sie ihn ein\nnpm-Pakete aktualisieren",
+                "ru": "добавлена поддержка устройств HEAT / WATER\nразделить текущую мощность на потребляемую мощность и подать\nобновить пакеты npm",
+                "pt": "adicionado suporte para dispositivos HEAT / WATER\ndividir a energia atual em consumo de energia e alimentar\natualizar pacotes npm",
+                "nl": "ondersteuning toegevoegd voor HEAT / WATER-apparaten\nSplits het huidige vermogen in stroomverbruik en voer in\nupdate npm-pakketten",
+                "fr": "Ajout de la prise en charge des appareils HEAT / WATER\ndiviser la puissance actuelle en consommation d'énergie et injecter\nmettre à jour les packages npm",
+                "it": "aggiunto il supporto per i dispositivi HEAT / WATER\ndividere la potenza corrente in consumo energetico e immetterla\naggiorna i pacchetti npm",
+                "es": "soporte agregado para dispositivos de CALOR / AGUA\ndividir la potencia actual en consumo de energía y alimentar\nactualizar paquetes npm",
+                "pl": "dodano obsługę urządzeń CIEPŁA / WODY\npodzielić aktualną moc na pobór mocy i oddanie\nzaktualizuj pakiety npm",
+                "zh-cn": "增加了对HEAT / WATER设备的支持\n将当前功率分为功耗并馈入\n更新npm软件包"
+            },
             "0.0.2-2": {
                 "en": "changed log from error to info",
                 "de": "Protokoll von Fehler zu Info geändert",

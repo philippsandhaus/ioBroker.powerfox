@@ -25,7 +25,7 @@ https://www.powerfox.energy/wp-content/uploads/2020/05/powerfox-Kunden-API.pdf
     ### __WORK IN PROGRESS__
 -->
 
-### __WORK IN PROGRESS__
+### 0.0.2-4 (2020-09-07)
 * (bazidibavaria) split current power into power consumption and feed in
 
 ### 0.0.2-3 (2020-09-07)

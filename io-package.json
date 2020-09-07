@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "powerfox",
-        "version": "0.0.2-3",
+        "version": "0.0.2-4",
         "news": {
+            "0.0.2-4": {
+                "en": "split current power into power consumption and feed in",
+                "de": "Teilen Sie den Strom in den Stromverbrauch auf und speisen Sie ihn ein",
+                "ru": "разделить текущую мощность на потребляемую мощность и подать",
+                "pt": "dividir a energia atual em consumo de energia e alimentar",
+                "nl": "Splits het huidige vermogen in stroomverbruik en voer in",
+                "fr": "diviser la puissance actuelle en consommation d'énergie et injecter",
+                "it": "dividere la potenza corrente in consumo energetico e immetterla",
+                "es": "dividir la potencia actual en consumo de energía y alimentar",
+                "pl": "podzielić aktualną moc na pobór mocy i oddanie",
+                "zh-cn": "将当前功率分为功耗并馈入"
+            },
             "0.0.2-3": {
                 "en": "added support for HEAT/WATER Devices\nsplit current power into power consumption and feed in\nupdate npm packages",
                 "de": "Unterstützung für HEAT / WATER-Geräte hinzugefügt\nTeilen Sie den Strom in den Stromverbrauch auf und speisen Sie ihn ein\nnpm-Pakete aktualisieren",

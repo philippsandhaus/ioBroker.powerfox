@@ -98,6 +98,13 @@ function startAdapter(options) {
                                     */
                                     if(type == "POWER"){
                                         if(data.hasOwnProperty("Watt")){
+                                            var consumption = 0, feedIn = 0;
+                                            if(data["Watt"] < 0){
+                                                feedIn = (data["Watt"] * -1);
+                                            } else {
+                                                consumption = data["Watt"];
+                                            }
+
                                             adapter.setObjectNotExists(path + '.currentPower', {
                                                 type: 'state',
                                                 common: {
@@ -111,6 +118,34 @@ function startAdapter(options) {
                                                 native: {},
                                             });
                                             adapter.setState(path+'.currentPower', data["Watt"]);
+
+                                            adapter.setObjectNotExists(path + '.currentPowerConsumption', {
+                                                type: 'state',
+                                                common: {
+                                                    name: 'current power consumption (W)',
+                                                    type: 'number',
+                                                    role: 'value',
+                                                    unit: "W",
+                                                    read: false,
+                                                    write: false,
+                                                },
+                                                native: {},
+                                            });
+                                            adapter.setState(path+'.currentPowerConsumption', consumption);
+
+                                            adapter.setObjectNotExists(path + '.currentFeedIn', {
+                                                type: 'state',
+                                                common: {
+                                                    name: 'current feed in (W)',
+                                                    type: 'number',
+                                                    role: 'value',
+                                                    unit: "W",
+                                                    read: false,
+                                                    write: false,
+                                                },
+                                                native: {},
+                                            });
+                                            adapter.setState(path+'.currentFeedIn', feedIn);
                                         }
 
                                         if(data.hasOwnProperty("A_Plus")){
@@ -287,8 +322,8 @@ function startAdapter(options) {
                     });
                 }
             }
-            killAdapter();
         });
+        killAdapter();
     });
 
     return adapter;

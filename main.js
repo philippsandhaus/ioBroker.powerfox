@@ -80,6 +80,14 @@ function startAdapter(options) {
                                 if(data.hasOwnProperty("message")){
                                     adapter.log.error('Error: ' + data.message);
                                 } else {
+                                    var type = "POWER";
+                                    //DEFINE TYPE
+                                    if(data.hasOwnProperty("WattHour")){
+                                        type = "HEAT";
+                                    } else if(data.hasOwnProperty("CubicMeterCold") || data.hasOwnProperty("CubicMeterWarm")){
+                                        type = "WATER";
+                                    }
+
                                     /*
                                         {
                                             "Watt": 891.0,
@@ -88,21 +96,145 @@ function startAdapter(options) {
                                             "A_Minus": 40175502.0
                                         }
                                     */
-                                    if(data.hasOwnProperty("Watt")){
-                                        adapter.setObjectNotExists(path + '.currentPower', {
-                                            type: 'state',
-                                            common: {
-                                                name: 'current power (W)',
-                                                type: 'number',
-                                                role: 'value',
-                                                unit: "W",
-                                                read: false,
-                                                write: false,
-                                            },
-                                            native: {},
-                                        });
-                                        adapter.setState(path+'.currentPower', data["Watt"]);
+                                    if(type == "POWER"){
+                                        if(data.hasOwnProperty("Watt")){
+                                            adapter.setObjectNotExists(path + '.currentPower', {
+                                                type: 'state',
+                                                common: {
+                                                    name: 'current power (W)',
+                                                    type: 'number',
+                                                    role: 'value',
+                                                    unit: "W",
+                                                    read: false,
+                                                    write: false,
+                                                },
+                                                native: {},
+                                            });
+                                            adapter.setState(path+'.currentPower', data["Watt"]);
+                                        }
+
+                                        if(data.hasOwnProperty("A_Plus")){
+                                            adapter.setObjectNotExists(path + '.consumptionMeterReadingKWh', {
+                                                type: 'state',
+                                                common: {
+                                                    name: 'consumption meter reading (KWh)',
+                                                    type: 'number',
+                                                    role: 'value',
+                                                    unit: "KWh",
+                                                    read: false,
+                                                    write: false,
+                                                },
+                                                native: {},
+                                            });
+                                            adapter.setState(path+'.consumptionMeterReadingKWh', (data["A_Plus"]/1000));
+
+                                            adapter.setObjectNotExists(path + '.consumptionMeterReadingWh', {
+                                                type: 'state',
+                                                common: {
+                                                    name: 'consumption meter reading (Wh)',
+                                                    type: 'number',
+                                                    role: 'value',
+                                                    unit: "Wh",
+                                                    read: false,
+                                                    write: false,
+                                                },
+                                                native: {},
+                                            });
+                                            adapter.setState(path+'.consumptionMeterReadingWh', (data["A_Plus"]));
+                                        }
+
+                                        if(data.hasOwnProperty("A_Minus")){
+                                            adapter.setObjectNotExists(path + '.feedInMeterReadingKWh', {
+                                                type: 'state',
+                                                common: {
+                                                    name: 'feed in meter reading (KWh)',
+                                                    type: 'number',
+                                                    role: 'value',
+                                                    unit: "KWh",
+                                                    read: false,
+                                                    write: false,
+                                                },
+                                                native: {},
+                                            });
+                                            adapter.setState(path+'.feedInMeterReadingKWh', (data["A_Minus"]/1000));
+
+                                            adapter.setObjectNotExists(path + '.feedInMeterReadingWh', {
+                                                type: 'state',
+                                                common: {
+                                                    name: 'feed in meter reading (Wh)',
+                                                    type: 'number',
+                                                    role: 'value',
+                                                    unit: "Wh",
+                                                    read: false,
+                                                    write: false,
+                                                },
+                                                native: {},
+                                            });
+                                            adapter.setState(path+'.feedInMeterReadingWh', (data["A_Minus"]));
+                                        }
+                                    } else if(type == "HEAT"){
+                                        if(data.hasOwnProperty("WattHour")){
+                                            adapter.setObjectNotExists(path + '.heatConsumptionReadingWh', {
+                                                type: 'state',
+                                                common: {
+                                                    name: 'heat consumption (Wh)',
+                                                    type: 'number',
+                                                    role: 'value',
+                                                    unit: "Wh",
+                                                    read: false,
+                                                    write: false,
+                                                },
+                                                native: {},
+                                            });
+                                            adapter.setState(path+'.heatConsumptionReadingWh', (data["WattHour"]));
+
+                                            adapter.setObjectNotExists(path + '.heatConsumptionReadingKWh', {
+                                                type: 'state',
+                                                common: {
+                                                    name: 'heat consumption (KWh)',
+                                                    type: 'number',
+                                                    role: 'value',
+                                                    unit: "KWh",
+                                                    read: false,
+                                                    write: false,
+                                                },
+                                                native: {},
+                                            });
+                                            adapter.setState(path+'.heatConsumptionReadingKWh', (data["WattHour"]/1000));
+                                        }
+                                    } else if(type == "WATER"){
+                                        if(data.hasOwnProperty("CubicMeterCold")){
+                                            adapter.setObjectNotExists(path + '.coldWaterLevel', {
+                                                type: 'state',
+                                                common: {
+                                                    name: 'cold water level in m³',
+                                                    type: 'number',
+                                                    role: 'value',
+                                                    unit: "m³",
+                                                    read: false,
+                                                    write: false,
+                                                },
+                                                native: {},
+                                            });
+                                            adapter.setState(path+'.coldWaterLevel', (data["CubicMeterCold"]));
+                                        }
+                                        if(data.hasOwnProperty("CubicMeterWarm")){
+                                            adapter.setObjectNotExists(path + '.warmWaterLevel', {
+                                                type: 'state',
+                                                common: {
+                                                    name: 'warm water level in m³',
+                                                    type: 'number',
+                                                    role: 'value',
+                                                    unit: "m³",
+                                                    read: false,
+                                                    write: false,
+                                                },
+                                                native: {},
+                                            });
+                                            adapter.setState(path+'.warmWaterLevel', (data["CubicMeterWarm"]));
+                                        }
                                     }
+
                                     if(data.hasOwnProperty("Timestamp")){
                                         adapter.setObjectNotExists(path + '.timestamp', {
                                             type: 'state',
@@ -118,106 +250,19 @@ function startAdapter(options) {
                                         let timestamp = new Date((parseInt(data["Timestamp"]) || 0) * 1000).toUTCString();
                                         adapter.setState(path+'.timestamp', timestamp);
                                     }
-                                    if(data.hasOwnProperty("A_Plus")){
-                                        adapter.setObjectNotExists(path + '.consumptionMeterReadingKWh', {
-                                            type: 'state',
-                                            common: {
-                                                name: 'consumption meter reading (KWh)',
-                                                type: 'number',
-                                                role: 'value',
-                                                unit: "KWh",
-                                                read: false,
-                                                write: false,
-                                            },
-                                            native: {},
-                                        });
-                                        adapter.setState(path+'.consumptionMeterReadingKWh', (data["A_Plus"]/1000));
 
-                                        adapter.setObjectNotExists(path + '.consumptionMeterReadingWh', {
-                                            type: 'state',
-                                            common: {
-                                                name: 'consumption meter reading (Wh)',
-                                                type: 'number',
-                                                role: 'value',
-                                                unit: "KWh",
-                                                read: false,
-                                                write: false,
-                                            },
-                                            native: {},
-                                        });
-                                        adapter.setState(path+'.consumptionMeterReadingWh', (data["A_Plus"]));
-
-                                        // adapter.getState(path + '.consumptionMeterReading', function (err, state) {
-                                        //     if(state){
-                                        //         let curVal = data["A_Plus"] - (state.val * 1000 || 0);
-
-                                        //         adapter.setObjectNotExists(path + '.consumption', {
-                                        //             type: 'state',
-                                        //             common: {
-                                        //                 name: 'consumption (Wh)',
-                                        //                 type: 'number',
-                                        //                 role: 'value',
-                                        //                 unit: "Wh",
-                                        //                 read: false,
-                                        //                 write: false,
-                                        //             },
-                                        //             native: {},
-                                        //         });
-                                        //         adapter.setState(path+'.consumption', curVal);
-                                        //     }
-                                            // adapter.setState(path+'.consumptionMeterReading', (data["A_Plus"]/1000));
-                                        // });
-                                    }
-                                    if(data.hasOwnProperty("A_Minus")){
-                                        adapter.setObjectNotExists(path + '.feedInMeterReadingKWh', {
-                                            type: 'state',
-                                            common: {
-                                                name: 'feed in meter reading (KWh)',
-                                                type: 'number',
-                                                role: 'value',
-                                                unit: "KWh",
-                                                read: false,
-                                                write: false,
-                                            },
-                                            native: {},
-                                        });
-                                        adapter.setState(path+'.feedInMeterReadingKWh', (data["A_Minus"]/1000));
-
-                                        adapter.setObjectNotExists(path + '.feedInMeterReadingWh', {
-                                            type: 'state',
-                                            common: {
-                                                name: 'feed in meter reading (Wh)',
-                                                type: 'number',
-                                                role: 'value',
-                                                unit: "KWh",
-                                                read: false,
-                                                write: false,
-                                            },
-                                            native: {},
-                                        });
-                                        adapter.setState(path+'.feedInMeterReadingWh', (data["A_Minus"]));
-
-                                        // adapter.getState(path + '.feedInMeterReading', function (err, state) {
-                                        //     if(state){
-                                        //         let curVal = data["A_Minus"] - (state.val * 1000 || 0);
-
-                                        //         adapter.setObjectNotExists(path + '.feedIn', {
-                                        //             type: 'state',
-                                        //             common: {
-                                        //                 name: 'feed in (Wh)',
-                                        //                 type: 'number',
-                                        //                 role: 'value',
-                                        //                 unit: "Wh",
-                                        //                 read: false,
-                                        //                 write: false,
-                                        //             },
-                                        //             native: {},
-                                        //         });
-                                        //         adapter.setState(path+'.feedIn', curVal);
-                                        //     }
-                                            // adapter.setState(path+'.feedInMeterReading', (data["A_Minus"]/1000));
-                                        // });
-                                    }
+                                    adapter.setObjectNotExists(path + '.type', {
+                                        type: 'state',
+                                        common: {
+                                            name: 'device type',
+                                            type: 'string',
+                                            role: 'text',
+                                            read: false,
+                                            write: false,
+                                        },
+                                        native: {},
+                                    });
+                                    adapter.setState(path+'.type', type);
                                 }
                             } else {
                                 adapter.log.error('NO JSON returned');
@@ -264,7 +309,7 @@ function killAdapter(){
 let killSwitchTimeout = setTimeout(() => {
     killSwitchTimeout = null;
     if (!isStopped) {
-        adapter && adapter.log && adapter.log.info('force terminating after 1 minute');
+        adapter && adapter.log && adapter.log.info('force terminating after 55 Seconds');
         adapter && adapter.stop && adapter.stop();
     }
 }, 55000);

@@ -24,9 +24,12 @@ https://www.powerfox.energy/wp-content/uploads/2020/05/powerfox-Kunden-API.pdf
     Placeholder for the next version (at the beginning of the line):
     ### __WORK IN PROGRESS__
 -->
+
+### __WORK IN PROGRESS__
+* (bazidibavaria) split current power into power consumption and feed in
+
 ### 0.0.2-3 (2020-09-07)
 * (bazidibavaria) added support for HEAT/WATER Devices
-* (bazidibavaria) split current power into power consumption and feed in
 * (bazidibavaria) update npm packages
 
 ### 0.0.2-2 (2020-08-27)
